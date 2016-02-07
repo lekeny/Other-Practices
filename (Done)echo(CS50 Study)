@@ -1,0 +1,38 @@
+/* Completely Working */
+
+/* The original question can be found at
+https://study.cs50.net/argv
+*/
+
+#include <iostream>
+
+int main(int argc, char* argv[])
+{
+    int i = 1;
+    if ( argc < 2 )
+    {
+        std::cout << "Need 2!!!\n";
+        return 1;
+    }
+    else
+    {
+        for(int i = 1; i < argc;i++)
+        {
+            int k = 0;
+            while(argv[i][k] != '\0')
+            {
+                std::cout << argv[i][k];
+                k++;
+            }
+
+            if ( i + 1 != argc )
+            {
+                std::cout << " ";   
+            }
+        }
+    }
+    
+    std::cout << std::endl;
+    
+    return 0;
+}
