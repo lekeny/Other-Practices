@@ -1,5 +1,5 @@
 //Completely Working
-//Output smallest and largest numbers that can be produced with 1st input ( amount of digits ) and 2nd input ( amount of distinct digits )
+//Output smallest and largest numbers that can be produced based on 1st input ( amount of total digits ) and 2nd input ( amount of total distinct digits )
 
 #include <iostream>
 
