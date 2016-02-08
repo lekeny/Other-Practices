@@ -1,0 +1,102 @@
+//Completely Working
+//Output smallest and largest numbers that can be produced with 1st input ( amount of digits ) and 2nd input ( amount of distinct digits )
+
+#include <iostream>
+
+int numOfDigits, numOfDistinctDigits;
+
+void outputLargestNumbers();
+
+void outputSmallestNumbers();
+
+int main(void)
+{
+	std::cin >> numOfDigits >> numOfDistinctDigits;	
+
+	outputSmallestNumbers();
+		
+	std::cout << " ";	
+	
+	outputLargestNumbers();
+		
+	return 0;
+}
+
+void outputLargestNumbers()
+{
+	int current = 9;
+	int DistinctDigitsUsed = 0;
+	int diff = numOfDigits - numOfDistinctDigits;
+	int getToDiff = 0;
+	
+	for(int i = 0; i < numOfDigits; i++)
+	{
+		if ( getToDiff < diff )
+		{
+			std::cout << current;
+			getToDiff++;
+		}
+		else if ( DistinctDigitsUsed < numOfDistinctDigits )
+		{
+			std::cout << current;
+			current--;
+			DistinctDigitsUsed++;
+		}
+		else
+		{
+			std::cout << current + 1;
+		}
+	}
+}
+
+void outputSmallestNumbers()
+{
+	int current = 1;
+	int DistinctDigitsUsed = 1;
+	int diff = numOfDigits - numOfDistinctDigits;
+	int getToDiff = 0;
+	int click = 0;
+	
+	for(int i = 0; i < numOfDigits; i++)
+	{
+		if ( i == 0 )
+		{
+			std::cout << 1;
+			DistinctDigitsUsed++;
+		}
+		else
+		{
+			if ( getToDiff < diff && numOfDistinctDigits != 1 )
+			{
+				std::cout << 0;
+				getToDiff++;
+			}
+			else if ( getToDiff < diff && numOfDistinctDigits == 1 )
+			{
+				std::cout << 1;
+				getToDiff++;
+			}
+			else
+			{
+				if ( DistinctDigitsUsed < numOfDistinctDigits )
+				{
+					if ( numOfDigits == numOfDistinctDigits && click == 0 )
+					{
+						std::cout << 0;
+						current += 1;
+						click = 1;
+					}
+					else
+					{
+						std::cout << current;
+						current++;
+					}
+
+					DistinctDigitsUsed++;					
+				}
+				else
+					std::cout << current;
+			}
+		}
+	}
+}
