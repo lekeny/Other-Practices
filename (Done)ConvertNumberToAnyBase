@@ -1,0 +1,54 @@
+//This program takes in two inputs (numberToBeConverted, and base) and will convert numberToBeConverted(in decimal) into the designated base.
+
+//Completely Working!
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+int main(void)
+{
+	int numberToBeConverted, base, amountOfDigits = 0, lastOperation = 0;
+	std::vector<char> convertedNumber;
+
+	while (1)
+	{
+		std::cin >> numberToBeConverted >> base;
+		lastOperation = 0;
+		amountOfDigits = 0;
+
+		while (numberToBeConverted >= base || lastOperation == 0)
+		{
+			if (numberToBeConverted < base)
+			{
+				lastOperation = 1;
+			}
+
+			amountOfDigits++;
+			convertedNumber.resize(amountOfDigits);
+
+			if (numberToBeConverted % base <= 9)
+			{
+				convertedNumber.at(amountOfDigits - 1) = (numberToBeConverted % base) + '0';
+			}
+			else if (numberToBeConverted % base > 9 && numberToBeConverted % base <= 35)
+			{
+				convertedNumber.at(amountOfDigits - 1) = (numberToBeConverted % base) + '0' + ('A' - '9' - 1);
+			}
+			else
+			{
+				convertedNumber.at(amountOfDigits - 1) = (numberToBeConverted % base) + '0' + ('A' - '9' - 1) + ('a' - 'Z' - 1);
+			}
+
+			numberToBeConverted /= base;
+		}
+
+		for (int i = convertedNumber.size() - 1; i >= 0; i--)
+		{
+			std::cout << convertedNumber.at(i) << " ";
+		}
+		std::cout << std::endl;
+	}
+
+	return 0;
+}
