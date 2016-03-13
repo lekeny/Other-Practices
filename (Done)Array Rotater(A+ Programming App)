@@ -1,0 +1,78 @@
+//Array Rotater --- Rotate an array n times to the right
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+int original[100];
+
+int sizeofOrginal = sizeof(original) / 4;
+
+void rev (int *original, int amountOfRotation)
+{
+    int currentIndex = sizeofOrginal-amountOfRotation;
+    int lastIndex = sizeofOrginal - 1;
+    for(int i = 0; i < amountOfRotation / 2; i++)
+    {
+        int temp = original[currentIndex];
+        original[currentIndex] = original[lastIndex];
+        original[lastIndex] = temp;
+        currentIndex++;
+        lastIndex--;
+    }
+
+    currentIndex = 0;
+    lastIndex = sizeofOrginal- amountOfRotation - 1;
+    for(int i = 0; i < (sizeofOrginal- amountOfRotation) / 2; i++)
+    {
+        int temp = original[currentIndex];
+        original[currentIndex] = original[lastIndex];
+        original[lastIndex] = temp;
+        currentIndex++;
+        lastIndex--;
+    }
+
+    currentIndex = 0;
+    lastIndex = sizeofOrginal- 1;
+    for(int i = 0; i < sizeofOrginal/ 2; i++)
+    {
+        int temp = original[currentIndex];
+        original[currentIndex] = original[lastIndex];
+        original[lastIndex] = temp;
+        currentIndex++;
+        lastIndex--;
+    }
+}
+
+int main()
+{
+    std::cout << "Please enter your array elements, terminate with the 'enter' key: ";
+    sizeofOrginal = 0;
+    std::string originalInput;
+    std::getline(std::cin, originalInput);
+    int converter;
+    std::stringstream finalOutput(originalInput);
+    while ( finalOutput >> converter )
+    {
+        original[sizeofOrginal] = converter;
+        sizeofOrginal++;
+    }
+
+    std::cout << "How many times to rotate to the right? ";
+    int rotationAmount;
+    std::cin >> rotationAmount;
+
+
+    for( int i = 0 ; i < sizeofOrginal; i++)
+    {
+        std::cout << original[i] << " ";
+    }
+    rev(original, rotationAmount);
+
+    std::cout << "\nDone Rotating!\n";
+
+    for( int i = 0 ; i < sizeofOrginal; i++)
+    {
+        std::cout << original[i] << " ";
+    }
+}
