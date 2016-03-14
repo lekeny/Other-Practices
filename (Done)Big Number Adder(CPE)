@@ -1,0 +1,101 @@
+//Big Number Adder
+
+#include <iostream>
+#include <string>
+
+int bigNum[1000];
+int bigNum2[1000];
+int sum[1000];
+
+int main(void)
+{
+    std::cout << "Please enter your first big number: ";
+    std::string originalNumber;
+    std::getline(std::cin, originalNumber);
+    int index = originalNumber.size() - 1;
+    for(int i = 0; i < originalNumber.size(); i++)
+    {
+        bigNum[index] = originalNumber[i] - '0';
+        index--;
+    }
+
+    std::cout << "Please enter your second big number: ";
+    std::getline(std::cin, originalNumber);
+    index = originalNumber.size() - 1;
+    for(int i = 0; i < originalNumber.size(); i++)
+    {
+        bigNum2[index] = originalNumber[i] - '0';
+        index--;
+    }
+
+    std::cout << "Please wait...adding your 2 big numbers together...\n";
+    for(int i = 0; i < 1000; i++)
+    {
+        sum[i] = bigNum[i] + bigNum2[i];
+    }
+    for(int i = 0; i < 999; i++)
+    {
+        sum[i+1] += sum[i] / 10;
+        sum[i] %= 10;
+    }
+
+    std::cout << "Here you go: ";
+    for(int i = 999; i >= 0; i--)
+    {
+        while ( bigNum[i] == 0 && i >= 0 )
+        {
+            i--;
+        }
+        if ( i < 0 )
+        {
+            std::cout << 0;
+            break;
+        }
+        else
+        {
+            std::cout << bigNum[i];
+        }
+    }
+
+    std::cout << " + ";
+
+    for(int i = 999; i >= 0; i--)
+    {
+        while ( bigNum2[i] == 0 && i >= 0 )
+        {
+            i--;
+        }
+        if ( i < 0 )
+        {
+            std::cout << 0;
+            break;
+        }
+        else
+        {
+            std::cout << bigNum2[i];
+        }
+    }
+
+    std::cout << " = ";
+
+    for(int i = 999; i >= 0; i--)
+    {
+        while ( sum[i] == 0 && i >= 0 )
+        {
+            i--;
+        }
+        if ( i < 0 )
+        {
+            std::cout << 0;
+            break;
+        }
+        else
+        {
+            std::cout << sum[i];
+        }
+    }
+
+    std::cout << "!!!\n";
+
+    return 0;
+}
