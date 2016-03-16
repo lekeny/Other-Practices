@@ -1,0 +1,92 @@
+//Big Number Multiplier
+
+#include <iostream>
+#include <string>
+
+const int BIG_NUM_ARRAY_MAX_SIZE = 1000;
+
+void enterBigNum(std::string originalNumber, int *bigNum);
+void printBigNum(int *bigNum);
+void multiplyBigNum(int *bigNum1, int *bigNum2, int *product);
+
+int bigNum1[BIG_NUM_ARRAY_MAX_SIZE];
+int bigNum2[BIG_NUM_ARRAY_MAX_SIZE];
+int product[BIG_NUM_ARRAY_MAX_SIZE];
+
+int main(void)
+{
+    std::string originalNumber;
+
+    std::cout << "Enter first number: ";
+
+    std::getline(std::cin, originalNumber);
+
+    enterBigNum(originalNumber, bigNum1);
+
+    originalNumber = "";
+
+    std::cout << "Enter second number: ";
+
+    std::getline(std::cin, originalNumber);
+
+    enterBigNum(originalNumber, bigNum2);
+
+    printBigNum(bigNum1);
+    std::cout << " + ";
+    printBigNum(bigNum2);
+    std::cout << " = ";
+    multiplyBigNum(bigNum1, bigNum2, product);
+    printBigNum(product);
+    std::cout << std::endl;
+}
+
+void enterBigNum(std::string originalNumber, int *bigNum)
+{
+    int index = 0;
+    for(int i = originalNumber.size() - 1; i >= 0; i--)
+    {
+        bigNum[index] = originalNumber[i] - '0';
+        index++;
+    }
+}
+
+void printBigNum(int *bigNum)
+{
+    int i = BIG_NUM_ARRAY_MAX_SIZE - 1;
+    while ( bigNum[i] == 0 )
+    {
+        i--;
+    }
+    if ( i < 0 )
+    {
+        std::cout << 0;
+        return;
+    }
+    while ( i >= 0 )
+    {
+        std::cout << bigNum[i];
+        i--;
+    }
+
+}
+
+void multiplyBigNum(int *bigNum1, int *bigNum2, int *product)
+{
+    for(int i = 0; i < BIG_NUM_ARRAY_MAX_SIZE; i++)
+    {
+        for(int j = 0; j < BIG_NUM_ARRAY_MAX_SIZE; j++)
+        {
+            if ( i + j < BIG_NUM_ARRAY_MAX_SIZE )
+            {
+                product[i+j] += bigNum1[i] * bigNum2[j];
+            }
+
+        }
+    }
+
+    for(int i = 0; i < BIG_NUM_ARRAY_MAX_SIZE - 1; i++) //Carry Over
+    {
+        product[i+1] += product[i] / 10;
+        product[i] %= 10;
+    }
+}
