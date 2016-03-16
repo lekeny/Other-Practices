@@ -32,7 +32,7 @@ int main(void)
     enterBigNum(originalNumber, bigNum2);
 
     printBigNum(bigNum1);
-    std::cout << " + ";
+    std::cout << " * ";
     printBigNum(bigNum2);
     std::cout << " = ";
     multiplyBigNum(bigNum1, bigNum2, product);
