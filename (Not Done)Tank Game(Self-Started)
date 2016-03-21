@@ -1,0 +1,94 @@
+//Tank Game
+
+#include <iostream>
+#include <conio.h>
+
+#define KB_UP 72
+#define KB_DOWN 80
+#define KB_LEFT 75
+#define KB_RIGHT 77
+#define KB_ESCAPE 27
+
+
+void startGame()
+{
+
+
+}
+
+void drawBoard()
+{
+    const int boardX = 20, boardY = 40;
+    for(int i = 0; i < boardX; i++)
+    {
+        for(int j = 0; j < boardY; j++)
+        {
+            if ( i == 0 || i == boardX - 1 )
+            {
+                std::cout << "*";
+            }
+            else
+            {
+                if (j == 0 || j == boardY - 1)
+                {
+                    std::cout << "*";
+                }
+                else
+                {
+                    std::cout << " ";
+                }
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
+void readKeyboard()
+{
+   int KB_code=0;
+
+   while(KB_code != KB_ESCAPE )
+   {
+     if (kbhit())
+      {
+            KB_code = getch();
+            std::cout << "KB_code = " << KB_code << std::endl;
+
+            switch (KB_code)
+            {
+                case KB_LEFT:
+                           //Do something
+                           std::cout << "LEFT\n";
+                break;
+
+                case KB_RIGHT:
+                           //Do something
+                break;
+
+                case KB_UP:
+                           //Do something
+                break;
+
+                case KB_DOWN:
+                           //Do something
+                break;
+
+            }
+
+      }
+  }
+}
+
+void drawTankA()
+{
+
+}
+
+int main(void)
+{
+    startGame();
+    drawBoard();
+    readKeyboard();
+    drawTankA();
+
+}
