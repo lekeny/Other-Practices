@@ -1,0 +1,30 @@
+/* Convert int to and from string without using C++11 features (i.e. to_string() & stoi()) */
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+int main()
+{
+    //Convert int to string
+    int iAmTheOriginalInt;
+    std::cin >> iAmTheOriginalInt;
+    std::string iAmTheNewString;
+    std::stringstream iAmTheConverter;
+    iAmTheConverter << iAmTheOriginalInt;
+    iAmTheNewString = iAmTheConverter.str();
+    std::cout << "I am a string: " << iAmTheNewString << std::endl;
+
+    //Reset
+    std::cin.ignore();
+
+    //Convert string to int
+    std::string iAmTheOriginalString;
+    std::getline( std::cin, iAmTheOriginalString );
+    int iAmTheNewInt;
+    std::stringstream iAmTheConverter2( iAmTheOriginalString );
+    while( iAmTheConverter2 >> iAmTheNewInt )
+    {
+        std::cout << "I am an integer: " << iAmTheNewInt << std::endl;
+    }
+}
