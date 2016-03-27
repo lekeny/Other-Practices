@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+int main()
+{
+    
+    
+    //////////////////// MUST USE MAP INSTEAD OF VECTOR BECAUSE THE LAST DATASET WILL GO OVER THE RANGE OF VECTOR'S MAX SIZE /////////
+    
+    std::vector<std::string> EXTAry;
+    std::vector<std::string> MTAry;
+    
+    int N; // Number of elements which make up the association table.
+    cin >> N; cin.ignore();
+    int Q; // Number Q of file names to be analyzed.
+    cin >> Q; cin.ignore();
+    for (int i = 0; i < N; i++) {
+        string EXT; // file extension
+        string MT; // MIME type.
+        cin >> EXT >> MT; cin.ignore();
+        
+        for(int k = 0; k < EXT.size();k++)
+        {
+            EXT[k] = tolower(EXT[k]);
+        }
+        
+        
+        EXTAry.push_back(EXT);
+        MTAry.push_back(MT);
+        
+    }
+    
+    for (int i = 0; i < Q; i++) {
+        string FNAME; // One file name per line.
+        getline(cin, FNAME);
+        
+        for(int k = 0; k < FNAME.size();k++)
+        {
+            FNAME[k] = tolower(FNAME[k]);
+        }
+        
+        
+        bool isFound = false;
+        
+        for(int j = 0; j < EXTAry.size(); j++)
+        {
+            std::string target = "." + EXTAry[j];
+           // std:: cout << "target is " << target << std::endl;
+           int positionOfLastDot = FNAME.find_last_of(".");
+                if (FNAME.find(target, positionOfLastDot) != std::string::npos) //found!
+                {
+                    //std::cout << "found " << MTAry[j] << "\n";
+                    std::cout << MTAry[j] << std::endl;
+                    isFound = true;
+                }
+        }
+        
+        if (isFound == false )
+        {
+            std::cout << "UNKNOWN" << std::endl;
+        }
+
+    }
+
+    // Write an action using cout. DON'T FORGET THE "<< endl"
+    // To debug: cerr << "Debug messages..." << endl;
+
+ //   cout << "UNKNOWN" << endl; // For each of the Q filenames, display on a line the corresponding MIME type. If there is no corresponding type, then display UNKNOWN.
+}
