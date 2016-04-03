@@ -1,0 +1,79 @@
+//    https://www.codingame.com/ide/40638839fd4423fe017897bd4dc75f714dcb459?utm_term=en&utm_source=Digest&utm_medium=puzzle&utm_content=view&utm_campaign=Notifications
+
+#include <iostream>
+
+void printStar(int amountOfStarsToBePrinted);
+void printSpace(int amountOfSpacesToBePrinted);
+void printTopTriangle(int heightOfTriangle);
+void printBottomTriangles(int heightOfTriangles);
+
+int main(void)
+{
+    int heightOfTriangle;
+
+    std::cin >> heightOfTriangle;
+
+    std::cout << ".";
+
+    printTopTriangle(heightOfTriangle);
+    printBottomTriangles(heightOfTriangle);
+}
+
+void printStar(int amountOfStarsToBePrinted)
+{
+    for(int i = 0; i < amountOfStarsToBePrinted; i++)
+    {
+        std::cout << "*";
+    }
+}
+
+void printSpace(int amountOfSpacesToBePrinted)
+{
+    for(int i = 0; i < amountOfSpacesToBePrinted; i++)
+    {
+        std::cout << " ";
+    }
+}
+
+void printTopTriangle(int heightOfTriangle)
+{
+    int amountOfStarsToBePrinted = 1;
+    for(int i = heightOfTriangle - 1; i >= 0; i--)
+    {
+        //Left-padding the top triangle with spaces.
+        if (i == heightOfTriangle - 1)  //1 less space to print on the first line to take into account the "." at the beginning.
+        {
+            printSpace(heightOfTriangle-1);
+        }
+        else
+        {
+            printSpace(heightOfTriangle);
+        }
+        printSpace(i);
+        printStar(amountOfStarsToBePrinted);
+        amountOfStarsToBePrinted+=2;
+        std::cout << std::endl;
+    }
+}
+
+void printBottomTriangles(int heightOfTriangles)
+{
+    int amountOfStarsToBePrinted = 1;
+    int centerSpacesOfTriforce = 1;
+
+    for(int i = 1; i < heightOfTriangles; i++)
+    {
+        centerSpacesOfTriforce += 2;
+    }
+
+    for(int i = heightOfTriangles - 1; i >= 0; i--)
+    {
+        printSpace(i);
+        printStar(amountOfStarsToBePrinted);
+        printSpace(centerSpacesOfTriforce);
+        printStar(amountOfStarsToBePrinted);
+        centerSpacesOfTriforce -=2;
+        amountOfStarsToBePrinted +=2;
+        std::cout << std::endl;
+    }
+}
