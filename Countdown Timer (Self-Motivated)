@@ -2,6 +2,10 @@
     A simple c++ countdown timer!
 */
 
+//TODO: Add a "pause" button.
+//TODO: Store history in a file and read from it.
+//TODO: Play sounds.
+
 #include <iostream>
 #include <windows.h>
 #include <time.h>
