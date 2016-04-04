@@ -12,14 +12,19 @@ int main(void)
     std::cout << "Set Timer(Minutes): ";
     std::cin >> countdownTimer;
 
-    countdownTimer *= 60;
+    int currentClock = clock() / CLOCKS_PER_SEC, secondsPassedWhenUserMakesAnEntry = 0;
+    if (currentClock != 0)
+    {
+        secondsPassedWhenUserMakesAnEntry = currentClock;
+    }
 
-    int currentClock = clock() / CLOCKS_PER_SEC;
     int previousClock = currentClock;
+
+    countdownTimer *= 60;
 
     while ( countdownTimer - currentClock > 0 )
     {
-        currentClock = clock() / CLOCKS_PER_SEC;
+        currentClock = ( clock() / CLOCKS_PER_SEC ) - secondsPassedWhenUserMakesAnEntry;
         if ( previousClock != currentClock )
         {
             previousClock = currentClock;
