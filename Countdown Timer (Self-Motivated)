@@ -2,13 +2,13 @@
     A simple c++ countdown timer!
 */
 
-//TODO: Add a "pause" button.
-//TODO: Store history in a file and read from it.
-//TODO: Play sounds.
+//TODO: Store completion history in a file and read from it.
+//TODO: Play sounds when timer ends.
 
 #include <iostream>
-#include <windows.h>
-#include <time.h>
+#include <windows.h>    //system()
+#include <time.h>   //clock(), CLOCKS_PER_SEC
+#include <conio.h>  //_kbhit(), _getch()
 
 int main(void)
 {
@@ -17,24 +17,52 @@ int main(void)
     std::cin >> countdownTimer;
 
     int currentClock = clock() / CLOCKS_PER_SEC, secondsPassedWhenUserMakesAnEntry = 0;
-    if (currentClock != 0)
+    if ( currentClock != 0 )
     {
         secondsPassedWhenUserMakesAnEntry = currentClock;
     }
 
+    countdownTimer *= 60;
+
     int previousClock = currentClock;
 
-    countdownTimer *= 60;
+    int isPaused = 0, secondsPassedDuringPause = 0, totalPausedSeconds = 0;
 
     while ( countdownTimer - currentClock > 0 )
     {
-        currentClock = ( clock() / CLOCKS_PER_SEC ) - secondsPassedWhenUserMakesAnEntry;
-        if ( previousClock != currentClock )
+        if ( _kbhit() )
+        {
+            switch( _getch() )
+            {
+            case 'p':
+            case 'P':
+                isPaused++;
+                isPaused %= 2;
+                break;
+            default:
+                break;
+            }
+        }
+
+        if ( isPaused == 0 )
+        {
+            totalPausedSeconds += secondsPassedWhenUserMakesAnEntry + secondsPassedDuringPause;
+            secondsPassedWhenUserMakesAnEntry = 0;
+            secondsPassedDuringPause = 0;
+            currentClock = ( clock() / CLOCKS_PER_SEC ) - totalPausedSeconds;
+        }
+        else
+        {
+            secondsPassedDuringPause = ( ( (clock() / CLOCKS_PER_SEC) - totalPausedSeconds ) - currentClock );
+        }
+
+        if ( previousClock != currentClock && isPaused == 0 )
         {
             previousClock = currentClock;
             system("cls");
             std::cout << "Set Timer(Minutes): " << countdownTimer / 60 << std::endl;
             std::cout << "\nCountdown: " << (countdownTimer - currentClock) / 60 << " m " << (countdownTimer - currentClock) % 60 << " s" << std::endl;
+            std::cout << "\n ==Press 'P' to Pause==\n\n";
         }
     }
 
