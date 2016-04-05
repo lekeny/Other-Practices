@@ -2,6 +2,7 @@
     A simple c++ countdown timer!
 */
 
+//TODO: Display how many seconds the user spends pausing the timer.
 //TODO: Store completion history in a file and read from it.
 //TODO: Play sounds when timer ends.
 
