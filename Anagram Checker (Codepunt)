@@ -1,0 +1,58 @@
+/*
+    This program takes two string inputs and checks to see if they are anagrams.
+*/
+
+#include <iostream>
+#include <cstring>
+
+int main(void)
+{
+    int original[26], anagram[26];
+
+    while(1)
+    {
+        bool isAnagram = true;
+        memset(original, 0, sizeof(original));
+        memset(anagram, 0, sizeof(anagram));
+
+        std::string originalString;
+        std::getline(std::cin, originalString);
+
+        for(int i = 0; i < originalString.size(); i++)
+        {
+            if (originalString[i] != ' ')
+            {
+                original[tolower(originalString[i])-'a']++;
+            }
+        }
+
+        std::string anagramString;
+        std::getline(std::cin, anagramString);
+
+        for(int i = 0; i < anagramString.size(); i++)
+        {
+            if (anagramString[i] != ' ')
+            {
+                anagram[tolower(anagramString[i])-'a']++;
+            }
+       }
+
+        for(int i = 0; i < sizeof(original)/4; i++)
+        {
+            if ( original[i] != anagram[i] )
+            {
+                isAnagram = false;
+                break;
+            }
+        }
+
+        if (isAnagram == true)
+        {
+            std::cout << "True\n";
+        }
+        else
+        {
+            std::cout << "False.\n";
+        }
+    }
+}
