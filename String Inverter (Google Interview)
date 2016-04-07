@@ -1,6 +1,6 @@
 /*
     -String Inverter-
-    This program takes a string and invert the order of every word in that string.
+    This program takes a string and inverts the order of every word in that string.
     Ex. "The weather is just fine" would become "fine just is weather The".
 
     Source of Inspiration: https://jeena.net/interview-workshop
