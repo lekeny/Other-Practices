@@ -1,0 +1,58 @@
+/*
+    -String Inverter-
+    This program takes a string and invert the order of every word in that string.
+    Ex. "The weather is just fine" would become "fine just is weather The".
+
+    Source of Inspiration: https://jeena.net/interview-workshop
+*/
+
+#include <iostream>
+#include <string>
+
+void invertString(std::string &originalString);
+
+int main(void)
+{
+    std::string original;
+    std::getline(std::cin, original);
+
+    invertString(original);
+    std::cout << original << std::endl;
+
+}
+
+void invertString(std::string &originalString)
+{
+    std::string invertedString;
+    int sizeofWord = 0;
+
+    for(int i = originalString.size() - 1; i >=0; i-- )
+    {
+        if (originalString[i] != ' ')
+        {
+            sizeofWord++;
+        }
+        if ( originalString[i] == ' ' || i == 0)
+        {
+            if ( i == 0 )
+            {
+                for(int j = i; j < i + sizeofWord; j++)
+                {
+                     invertedString += originalString[j];
+                }
+            }
+            else
+            {
+                for(int j = i + 1; j <= i + sizeofWord; j++)
+                {
+                    invertedString += originalString[j];
+                }
+                invertedString += ' ';
+            }
+
+            sizeofWord = 0;
+        }
+    }
+
+    originalString = invertedString;
+}
